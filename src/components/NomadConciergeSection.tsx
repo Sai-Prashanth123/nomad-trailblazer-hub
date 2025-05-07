@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
-import { Airplane, FileText, Users, Building, Coffee, Search } from 'lucide-react';
+import { Plane, FileText, Users, Building, Coffee, Search } from 'lucide-react';
 
 const NomadConciergeSection = () => {
   const { toast } = useToast();
@@ -24,7 +24,7 @@ const NomadConciergeSection = () => {
   // Feature cards data
   const features = [
     {
-      icon: <Airplane className="h-8 w-8 text-earth-terracotta" />,
+      icon: <Plane className="h-8 w-8 text-earth-terracotta" />,
       title: "Visa Help",
       description: "Get personalized visa requirements and application assistance for any country."
     },
