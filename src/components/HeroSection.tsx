@@ -1,6 +1,5 @@
-
 import { useState, useEffect, useRef } from 'react';
-import Globe from './Globe';
+import SplineGlobe from './SplineGlobe';
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles, MapPin } from 'lucide-react';
 
@@ -196,20 +195,9 @@ const HeroSection = () => {
             </div>
             
             {/* Right column - Globe */}
-            <div className="relative">
-              <div className="p-4 relative">
-                <Globe />
-                
-                {/* Decorative pings on the globe */}
-                <div className="absolute top-1/4 left-1/4 w-3 h-3">
-                  <span className="absolute w-full h-full rounded-full bg-earth-terracotta opacity-75 animate-ping"></span>
-                  <span className="absolute w-full h-full rounded-full bg-earth-terracotta"></span>
-                </div>
-                
-                <div className="absolute bottom-1/3 right-1/3 w-3 h-3">
-                  <span className="absolute w-full h-full rounded-full bg-earth-clay opacity-75 animate-ping" style={{ animationDelay: '1s' }}></span>
-                  <span className="absolute w-full h-full rounded-full bg-earth-clay"></span>
-                </div>
+            <div className="relative h-[400px] md:h-[500px]">
+              <div className="p-4 h-full relative">
+                <SplineGlobe />
               </div>
               
               {/* Floating label */}
