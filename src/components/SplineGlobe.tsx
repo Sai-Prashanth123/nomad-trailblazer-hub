@@ -19,7 +19,7 @@ const SplineGlobe = () => {
     <div className="relative w-full h-full" ref={splineContainerRef}>
       <spline-viewer 
         url="https://my.spline.design/worldplanet-dYMRfEnujtJEKH41LnxShtb2/" 
-        class="w-full h-full"
+        className="w-full h-full"
         style={{ width: '100%', height: '100%' }}
       />
     </div>
