@@ -289,7 +289,7 @@ const Globe = () => {
 
   return (
     <div className="relative flex items-center justify-center">
-      <div className="absolute inset-0 globe-gradient"></div>
+      <div className="absolute inset-0 globe-gradient rounded-full"></div>
       <canvas
         ref={canvasRef}
         className="relative z-10 cursor-pointer"

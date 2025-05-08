@@ -223,7 +223,7 @@ const HeroSection = () => {
       <div className="absolute -bottom-32 -left-32 w-72 h-72 bg-earth-forest/10 rounded-full blur-3xl animate-pulse-glow" style={{ animationDelay: '1.5s' }}></div>
       <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-full h-full bg-gradient-radial from-earth-sand/5 to-transparent pointer-events-none"></div>
       
-      <style jsx global>{`
+      <style>{`
         @keyframes spin-slow {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
