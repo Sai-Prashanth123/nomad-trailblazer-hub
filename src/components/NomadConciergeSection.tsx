@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -313,7 +312,7 @@ const NomadConciergeSection = () => {
         </div>
       </div>
       
-      <style jsx global>{`
+      <style>{`
         @keyframes confetti {
           0% { transform: translate(0, 0) rotate(0deg); opacity: 1; }
           100% { transform: translate(${Math.random() > 0.5 ? '-' : ''}${20 + Math.random() * 30}px, -100px) rotate(${Math.random() * 360}deg); opacity: 0; }
