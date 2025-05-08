@@ -89,13 +89,13 @@ const Globe = () => {
       const centerY = canvas.height / 2;
       const radius = canvas.width * 0.35;
       
-      // Draw the globe with a subtle earth tone gradient
+      // Draw the globe with a subtle earth tone gradient and transparency
       const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
-      gradient.addColorStop(0, '#E6D2B5'); // Sand
-      gradient.addColorStop(0.5, '#BEB6A6'); // Stone
-      gradient.addColorStop(1, '#8A8F7F'); // Olive
+      gradient.addColorStop(0, 'rgba(230, 210, 181, 0.7)'); // Sand with transparency
+      gradient.addColorStop(0.5, 'rgba(190, 182, 166, 0.7)'); // Stone with transparency
+      gradient.addColorStop(1, 'rgba(138, 143, 127, 0.7)'); // Olive with transparency
       
-      // Globe base
+      // Globe base with transparency
       ctx.beginPath();
       ctx.arc(centerX, centerY, radius, 0, Math.PI * 2);
       ctx.fillStyle = gradient;
@@ -107,8 +107,8 @@ const Globe = () => {
       ctx.fillStyle = 'rgba(255, 255, 255, 0.1)';
       ctx.fill();
       
-      // Grid lines effect
-      ctx.strokeStyle = 'rgba(255,255,255,0.1)';
+      // Grid lines effect - more visible
+      ctx.strokeStyle = 'rgba(255,255,255,0.15)';
       ctx.lineWidth = 0.5;
       
       // Draw longitude lines
@@ -141,17 +141,17 @@ const Globe = () => {
         ctx.stroke();
       }
 
-      // Draw locations
+      // Draw locations with enhanced visibility
       locations.forEach(location => {
         const point = lonLatToPoint(location.lon, location.lat, radius);
         
-        // Only draw points on the visible side of the globe
+        // Only draw points on the visible side of the globe with improved transparency
         if (point.visibility > -0.15) {
           const alpha = (point.visibility + 0.15) / 1.15;
           const x = centerX + point.x;
           const y = centerY + point.y;
           
-          // Draw location dot
+          // Draw location dot with enhanced glow
           ctx.beginPath();
           ctx.arc(x, y, location.size * (alpha * 0.7 + 0.3), 0, Math.PI * 2);
           ctx.fillStyle = `rgba(198, 110, 78, ${alpha.toFixed(2)})`;
@@ -159,13 +159,13 @@ const Globe = () => {
           
           // Draw glow effect
           ctx.beginPath();
-          ctx.arc(x, y, location.size * 2 * (alpha * 0.7 + 0.3), 0, Math.PI * 2);
+          ctx.arc(x, y, location.size * 2.5 * (alpha * 0.7 + 0.3), 0, Math.PI * 2);
           ctx.fillStyle = `rgba(198, 110, 78, ${(alpha * 0.3).toFixed(2)})`;
           ctx.fill();
         }
       });
 
-      // Draw flight paths
+      // Draw flight paths with enhanced animation
       flightPaths.forEach((path, index) => {
         const fromLoc = locations[path.from];
         const toLoc = locations[path.to];
@@ -193,44 +193,65 @@ const Globe = () => {
           const avgVisibility = (Math.max(fromPoint.visibility, -0.2) + Math.max(toPoint.visibility, -0.2)) / 2 + 0.2;
           const normalizedVisibility = avgVisibility / 1.2;
           
-          // Draw the path
+          // Draw the path with enhanced glow
           ctx.beginPath();
           ctx.moveTo(fromX, fromY);
           ctx.quadraticCurveTo(controlX, controlY, toX, toY);
-          ctx.strokeStyle = `rgba(198, 110, 78, ${(normalizedVisibility * 0.5).toFixed(2)})`;
-          ctx.lineWidth = 1;
+          ctx.strokeStyle = `rgba(198, 110, 78, ${(normalizedVisibility * 0.6).toFixed(2)})`;
+          ctx.lineWidth = 1.5;
+          ctx.stroke();
+          
+          // Add glow effect to the path
+          ctx.beginPath();
+          ctx.moveTo(fromX, fromY);
+          ctx.quadraticCurveTo(controlX, controlY, toX, toY);
+          ctx.strokeStyle = `rgba(198, 110, 78, ${(normalizedVisibility * 0.3).toFixed(2)})`;
+          ctx.lineWidth = 3;
           ctx.stroke();
           
           // Animate a pulse along the path
           const pulsePos = (Date.now() / 2000 + index * 0.2) % 1;
-          const pulseSize = 2 + Math.sin(Date.now() / 200) * 0.5;
+          const pulseSize = 2.5 + Math.sin(Date.now() / 200) * 0.8;
           
           // Calculate position along the bezier curve
           const t = pulsePos;
           const pulsePosX = (1-t)*(1-t)*fromX + 2*(1-t)*t*controlX + t*t*toX;
           const pulsePosY = (1-t)*(1-t)*fromY + 2*(1-t)*t*controlY + t*t*toY;
           
-          // Draw the pulse
+          // Draw the pulse with enhanced glow
           ctx.beginPath();
           ctx.arc(pulsePosX, pulsePosY, pulseSize, 0, Math.PI * 2);
           ctx.fillStyle = `rgba(255, 255, 255, ${normalizedVisibility.toFixed(2)})`;
           ctx.fill();
+          
+          // Add outer glow to pulse
+          ctx.beginPath();
+          ctx.arc(pulsePosX, pulsePosY, pulseSize * 1.5, 0, Math.PI * 2);
+          ctx.fillStyle = `rgba(255, 255, 255, ${(normalizedVisibility * 0.5).toFixed(2)})`;
+          ctx.fill();
         }
       });
 
-      // Apply hover effect
+      // Apply hover effect with enhanced glow
       if (hoverEffect > 0) {
         ctx.beginPath();
         ctx.arc(centerX, centerY, radius + 5, 0, Math.PI * 2);
         ctx.strokeStyle = `rgba(198, 110, 78, ${hoverEffect.toFixed(2)})`;
-        ctx.lineWidth = 3;
+        ctx.lineWidth = 4;
+        ctx.stroke();
+        
+        // Add outer glow
+        ctx.beginPath();
+        ctx.arc(centerX, centerY, radius + 10, 0, Math.PI * 2);
+        ctx.strokeStyle = `rgba(198, 110, 78, ${(hoverEffect * 0.5).toFixed(2)})`;
+        ctx.lineWidth = 2;
         ctx.stroke();
       }
     };
 
-    // Animation loop
+    // Animation loop with enhanced rotation
     const animate = () => {
-      rotation += rotationSpeed;
+      rotation += rotationSpeed * (1 + Math.sin(Date.now() / 10000) * 0.3); // Variable rotation speed
       drawGlobe();
       requestId = requestAnimationFrame(animate);
     };
@@ -238,7 +259,7 @@ const Globe = () => {
     // Add hover effect
     const handleMouseEnter = () => {
       const fadeIn = () => {
-        if (hoverEffect < 0.6) {
+        if (hoverEffect < 0.7) { // Increased max effect
           hoverEffect += 0.05;
           requestAnimationFrame(fadeIn);
         }

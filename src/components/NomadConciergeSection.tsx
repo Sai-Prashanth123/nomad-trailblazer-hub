@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -6,7 +7,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Progress } from "@/components/ui/progress";
 import { 
   Plane, FileText, Users, Building, Coffee, Search,
-  Sparkles, Globe, Map, MessageSquare, ArrowRight
+  Sparkles, Globe, Map, MessageSquare, ArrowRight, Wifi, Home
 } from 'lucide-react';
 
 const NomadConciergeSection = () => {
@@ -79,7 +80,7 @@ const NomadConciergeSection = () => {
     }, 2000);
   };
   
-  // Feature cards data
+  // Feature cards data - Split coliving and coworking into separate cards
   const features = [
     {
       icon: <Plane className="h-8 w-8 text-earth-terracotta" />,
@@ -92,9 +93,14 @@ const NomadConciergeSection = () => {
       description: "Find the best flights with AI that considers climate, price, and stopover potential."
     },
     {
-      icon: <Building className="h-8 w-8 text-earth-terracotta" />,
-      title: "Coliving & Coworking",
-      description: "Discover spaces with strong WiFi, community, and great amenities."
+      icon: <Home className="h-8 w-8 text-earth-terracotta" />,
+      title: "Coliving",
+      description: "Discover community-focused living spaces with fellow digital nomads."
+    },
+    {
+      icon: <Wifi className="h-8 w-8 text-earth-terracotta" />,
+      title: "Coworking",
+      description: "Find spaces with reliable WiFi and great amenities for productive work."
     },
     {
       icon: <Coffee className="h-8 w-8 text-earth-terracotta" />,
@@ -145,7 +151,7 @@ const NomadConciergeSection = () => {
             </span>
           </div>
           
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">Plan Smarter. <span className="text-earth-terracotta">Wander Freer.</span></h2>
+          <h1 className="text-3xl md:text-4xl font-bold mb-4">Nomadic Concierge</h1>
           <p className="text-lg text-foreground/80 mb-6">Your AI-powered nomadic sidekick is here.</p>
           
           {/* Animated stats */}
