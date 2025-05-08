@@ -10,7 +10,13 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and description */}
           <div className="md:col-span-2">
-            <h2 className="text-2xl font-serif font-bold mb-4">NomadTrails</h2>
+            <div className="mb-4">
+              <img 
+                src="/lovable-uploads/67d9b570-bf37-4e7e-9d9c-e4bba69245d8.png" 
+                alt="NomadTrails Logo" 
+                className="h-12"
+              />
+            </div>
             <p className="text-foreground/70 max-w-sm">
               Empowering digital nomads with the tools and community they need to thrive anywhere in the world.
             </p>

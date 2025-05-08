@@ -33,12 +33,13 @@ const NavBar = () => {
       <div className="container flex items-center justify-between">
         {/* Logo */}
         <div className="flex items-center">
-          <div className="relative">
-            <h1 className="text-xl md:text-2xl font-serif font-bold">
-              NomadTrails
-            </h1>
-            <div className="absolute -inset-1 bg-earth-terracotta/20 rounded-full blur-md -z-10 animate-pulse-glow"></div>
-          </div>
+          <a href="/" className="flex items-center">
+            <img 
+              src="/lovable-uploads/67d9b570-bf37-4e7e-9d9c-e4bba69245d8.png" 
+              alt="NomadTrails Logo" 
+              className="h-10 md:h-12"
+            />
+          </a>
         </div>
 
         {/* Desktop Menu */}
