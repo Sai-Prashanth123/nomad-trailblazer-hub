@@ -1,5 +1,5 @@
+
 import { useState, useEffect, useRef } from 'react';
-import SplineGlobe from './SplineGlobe';
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles, MapPin } from 'lucide-react';
 
@@ -26,8 +26,9 @@ const HeroSection = () => {
   // Animation state
   const [floatingIcons, setFloatingIcons] = useState<{id: number, icon: string, x: number, y: number, speed: number}[]>([]);
 
-  // Refs for scroll
-  const nomadConciergeRef = useRef<HTMLDivElement | null>(null);
+  // Button click ripple effect
+  const [ripples, setRipples] = useState<{id: number, x: number, y: number}[]>([]);
+  const nextId = useRef(0);
 
   // Typewriter effect
   useEffect(() => {
@@ -69,7 +70,7 @@ const HeroSection = () => {
     
     setFloatingIcons(newFloatingIcons);
   }, []);
-
+  
   // Handle scroll to Nomad Concierge section
   const handleScrollToNomadConcierge = () => {
     const conciergeSection = document.getElementById('concierge');
@@ -77,11 +78,7 @@ const HeroSection = () => {
       conciergeSection.scrollIntoView({ behavior: 'smooth' });
     }
   };
-  
-  // Button click ripple effect
-  const [ripples, setRipples] = useState<{id: number, x: number, y: number}[]>([]);
-  const nextId = useRef(0);
-  
+
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const buttonRect = e.currentTarget.getBoundingClientRect();
     const rippleX = e.clientX - buttonRect.left;
@@ -105,7 +102,7 @@ const HeroSection = () => {
   };
 
   return (
-    <section className="min-h-screen pt-24 pb-16 flex items-center relative overflow-hidden">
+    <section className="min-h-screen py-24 flex items-center relative overflow-hidden">
       {/* Floating background icons */}
       {floatingIcons.map((item) => (
         <div 
@@ -123,8 +120,11 @@ const HeroSection = () => {
       ))}
       
       <div className="container">
-        <div className="flex flex-col items-center">
-          {/* Centered main heading */}
+        <div className="flex flex-col items-center max-w-4xl mx-auto text-center">
+          {/* Main heading */}
+          <h2 className="text-3xl font-serif font-bold text-earth-terracotta mb-6">Nomadic Concierge</h2>
+          
+          {/* Centered main tagline */}
           <div className="relative text-center mb-8">
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground leading-tight">
               {displayText}
@@ -145,64 +145,39 @@ const HeroSection = () => {
             <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-24 h-0.5 bg-earth-terracotta/30 animate-pulse-glow"></div>
           </div>
           
-          <div className="grid md:grid-cols-2 gap-8 items-center w-full">
-            {/* Left column - Button */}
-            <div className="flex flex-col justify-center items-center md:items-end space-y-8">
-              <div className="relative">
-                <Button 
-                  className="glassmorphism bg-gradient-to-r from-earth-terracotta to-earth-clay text-white px-6 py-6 text-lg font-medium overflow-hidden group"
-                  onClick={handleButtonClick}
-                >
-                  <span className="relative z-10 flex items-center">
-                    Start My Trail
-                    <ArrowDown className="ml-2 h-5 w-5 group-hover:animate-bounce" />
-                  </span>
-                  
-                  <span className="absolute inset-0 bg-gradient-to-r from-earth-terracotta to-earth-clay opacity-90 group-hover:opacity-100 transition-opacity"></span>
-                  
-                  {ripples.map(ripple => (
-                    <span
-                      key={ripple.id}
-                      className="absolute rounded-full bg-white/30 animate-ripple"
-                      style={{
-                        left: ripple.x,
-                        top: ripple.y,
-                        width: '10px',
-                        height: '10px',
-                        marginLeft: '-5px',
-                        marginTop: '-5px'
-                      }}
-                    />
-                  ))}
-                </Button>
+          {/* Call to action button */}
+          <div className="mt-8">
+            <div className="relative">
+              <Button 
+                className="glassmorphism bg-gradient-to-r from-earth-terracotta to-earth-clay text-white px-6 py-6 text-lg font-medium overflow-hidden group"
+                onClick={handleButtonClick}
+              >
+                <span className="relative z-10 flex items-center">
+                  Start My Trail
+                  <ArrowDown className="ml-2 h-5 w-5 group-hover:animate-bounce" />
+                </span>
                 
-                {/* Floating decoration */}
-                <div className="absolute -right-8 -bottom-8 text-earth-terracotta/20 animate-float">
-                  <MapPin size={32} />
-                </div>
-              </div>
+                <span className="absolute inset-0 bg-gradient-to-r from-earth-terracotta to-earth-clay opacity-90 group-hover:opacity-100 transition-opacity"></span>
+                
+                {ripples.map(ripple => (
+                  <span
+                    key={ripple.id}
+                    className="absolute rounded-full bg-white/30 animate-ripple"
+                    style={{
+                      left: ripple.x,
+                      top: ripple.y,
+                      width: '10px',
+                      height: '10px',
+                      marginLeft: '-5px',
+                      marginTop: '-5px'
+                    }}
+                  />
+                ))}
+              </Button>
               
-              {/* Floating badge */}
-              <div className="hidden lg:block absolute -left-20 top-1/2 transform -rotate-12">
-                <div className="relative">
-                  <div className="rounded-full bg-earth-sand/10 backdrop-blur-sm border border-earth-sand/20 px-4 py-1.5 text-xs font-medium flex items-center space-x-1 animate-float">
-                    <Sparkles className="h-3 w-3 text-earth-terracotta" />
-                    <span>New Experience</span>
-                  </div>
-                  <div className="absolute inset-0 rounded-full border-2 border-dashed border-earth-sand/20 animate-spin-slow"></div>
-                </div>
-              </div>
-            </div>
-            
-            {/* Right column - Globe */}
-            <div className="relative h-[400px] md:h-[500px]">
-              <div className="p-4 h-full relative">
-                <SplineGlobe />
-              </div>
-              
-              {/* Floating label */}
-              <div className="absolute -right-6 top-1/2 transform translate-y-1/2 rotate-12 bg-earth-forest/10 backdrop-blur-sm border border-earth-forest/20 rounded-lg px-3 py-1.5 text-xs animate-float">
-                14,500+ nomads
+              {/* Floating decoration */}
+              <div className="absolute -right-8 -bottom-8 text-earth-terracotta/20 animate-float">
+                <MapPin size={32} />
               </div>
             </div>
           </div>
