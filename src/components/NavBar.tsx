@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Menu, X } from 'lucide-react';
 import { Button } from "@/components/ui/button";
@@ -24,6 +23,11 @@ const NavBar = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Function to handle sign up button click
+  const handleSignUpClick = () => {
+    window.location.href = "https://ambitious-ground-045c5ba0f.6.azurestaticapps.net/";
+  };
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
@@ -47,7 +51,12 @@ const NavBar = () => {
           <a href="#features" className="text-foreground/80 hover:text-foreground transition-colors">Features</a>
           <a href="#concierge" className="text-foreground/80 hover:text-foreground transition-colors">Concierge</a>
           <a href="#community" className="text-foreground/80 hover:text-foreground transition-colors">Community</a>
-          <Button className="bg-earth-terracotta hover:bg-earth-terracotta/90 text-white">Sign Up</Button>
+          <Button 
+            className="bg-earth-terracotta hover:bg-earth-terracotta/90 text-white"
+            onClick={handleSignUpClick}
+          >
+            Sign Up
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
@@ -87,7 +96,10 @@ const NavBar = () => {
             </a>
             <Button 
               className="bg-earth-terracotta hover:bg-earth-terracotta/90 text-white" 
-              onClick={() => setIsMenuOpen(false)}
+              onClick={() => {
+                setIsMenuOpen(false);
+                handleSignUpClick();
+              }}
             >
               Sign Up
             </Button>

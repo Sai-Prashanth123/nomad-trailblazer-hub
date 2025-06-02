@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from "@/components/ui/button";
 import { ArrowDown, Sparkles, MapPin } from 'lucide-react';
@@ -71,12 +70,9 @@ const HeroSection = () => {
     setFloatingIcons(newFloatingIcons);
   }, []);
   
-  // Handle scroll to Nomad Concierge section
-  const handleScrollToNomadConcierge = () => {
-    const conciergeSection = document.getElementById('concierge');
-    if (conciergeSection) {
-      conciergeSection.scrollIntoView({ behavior: 'smooth' });
-    }
+  // Navigate to external URL
+  const handleStartMyTrail = () => {
+    window.location.href = "https://ambitious-ground-045c5ba0f.6.azurestaticapps.net/";
   };
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -98,7 +94,8 @@ const HeroSection = () => {
       setRipples(current => current.filter(ripple => ripple.id !== newRipple.id));
     }, 1000);
     
-    handleScrollToNomadConcierge();
+    // Navigate to external URL instead of scrolling
+    handleStartMyTrail();
   };
 
   return (
